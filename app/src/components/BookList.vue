@@ -37,7 +37,7 @@ export default {
     // Get All Books
     async getBooks() {
       try {
-        const response = await axios.get("http://localhost:5000/books");
+        const response = await axios.get("/books");
         this.items = response.data.items;
       } catch (err) {
         console.log(err);

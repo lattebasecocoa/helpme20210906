@@ -11,8 +11,10 @@ services:
     tty: true
     environment:
       TZ: Asia/Tokyo
-      VUE_APP_API_ENDPOINT: http://localhost:5000
+      VUE_APP_API_ENDPOINT: http://10.254.249.89:5000
     command: npm run serve
+    networks:
+      fixed_compose_network:
   api:
     container_name: api_container
     image: node:14.15.1-alpine
@@ -22,3 +24,12 @@ services:
     volumes:
       - ./api:/api
     command: node api/index.js
+    networks:
+      fixed_compose_network:
+        ipv4_address: 10.254.249.89
+networks:
+  fixed_compose_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.254.249.0/24
